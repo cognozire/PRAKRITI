@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ayurverda Dosha Prediction</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+      html, body {
+      min-height: 100%;
+      }
+      body, div, form, input, select, textarea, label { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: rgb(102, 102, 102);
+      line-height: 22px;
+      }
+      h1 {
+      position: absolute;
+      margin: 0;
+      font-size: 40px;
+      color: rgb(239, 235, 22);
+      z-index: 2;
+      line-height: 83px;
+      }
+      .testbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: inherit;
+      padding: 20px;
+      }
+      form {
+      width: 100%;
+      padding: 20px;
+      border-radius: 6px;
+      background: rgb(249, 234, 245);
+      box-shadow: 0 0 8px  #92027a; 
+      }
+      .banner {
+      position: relative;
+      height: 300px;
+       
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      }
+      .banner::after {
+      content: "";
+      background-color: rgba(0, 0, 0, 0.2); 
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      }
+      input, select, textarea {
+      margin-bottom: 10px;
+      border: 1px solid rgb(204, 204, 204);
+      border-radius: 3px;
+      }
+      input {
+      width: calc(100% - 10px);
+      padding: 5px;
+      }
+      input[type="date"] {
+      padding: 4px 5px;
+      }
+      textarea {
+      width: calc(100% - 12px);
+      padding: 5px;
+      }
+      .item:hover p, .item:hover i, .question:hover p, .question label:hover, input:hover::placeholder {
+      color: hsl(142, 86%, 41%);
+      }
+      .item input:hover, .item select:hover, .item textarea:hover {
+      border: 1px solid transparent;
+      box-shadow: 0 0 3px 0 #00cc03;
+      color: #1100cc;
+      }
+      .item {
+      position: relative;
+      margin: 10px 0;
+      }
+      .item span {
+      color: rgb(255, 0, 187);
+      }
+      input[type="date"]::-webkit-inner-spin-button {
+      display: none;
+      }
+    
+      .item i {
+      right: 1%;
+      top: 30px;
+      z-index: 1;
+      }
+      [type="date"]::-webkit-calendar-picker-indicator {
+      right: 1%;
+      z-index: 2;
+      opacity: 0;
+      cursor: pointer;
+      }
+      input[type=radio], input[type=checkbox]  {
+      display: none;
+      }
+      label.radio {
+      position: relative;
+      display: inline-block;
+      margin: 5px 20px 15px 0;
+      cursor: pointer;
+      }
+      .question span {
+      margin-left: 30px;
+      }
+      .question-answer label {
+      display: block;
+      }
+      label.radio:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      border: 2px solid rgb(200, 200, 194);
+      }
+      input[type=radio]:checked + label:before, label.radio:hover:before {
+      border: 2px solid #03cc00;
+      }
+      label.radio:after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 5px;
+      width: 8px;
+      height: 4px;
+      border: 3px solid #00cc1b;
+      border-top: none;
+      border-right: none;
+      transform: rotate(-45deg);
+      opacity: 0;
+      }
+      input[type=radio]:checked + label:after {
+      opacity: 1;
+      }
+      .btn-block {
+      margin-top: 10px;
+      text-align: center;
+      }
+      button {
+      width: 150px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px; 
+      background: #cc00ad;
+      font-size: 16px;
+      color: rgb(255, 255, 255);
+      cursor: pointer;
+      }
+      button:hover {
+      background: #00ff0d;
+      }
+      @media (min-width: 568px) {
+      .name-item, .city-item {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      }
+      .name-item input, .name-item div {
+      width: calc(50% - 20px);
+      }
+      .name-item div input {
+      width:97%;}
+      .name-item div label {
+      display:block;
+      padding-bottom:5px;
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="testbox">
+      <form id="form" method="POST" action="/result">
+        {% csrf_token %}
+        <div class="banner">
+          <h1>Ayurverda Dosha Prediction</h1>
+        </div>
+        <p>Please provide following information to help us predict your body dosha: </p>
+        <div class="item">
+          <label for="name">Name<span>*</span></label>
+          <input id="name" type="text" name="name" placeholder="enter here" required/>
+        </div>
+        <div class="question">
+          <p><b>Gender</b></p>
+          <select required>
+            <option value="">Select your gender</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="3">Prefer not to say</option>
+          </select>
+        </div>
+        <div class="item">
+          <label for="email">Email Address<span>*</span></label>
+          <input id="email" type="email" name="email" placeholder="abc@gmail.com" required/>
+        </div>
+        
+        <div class="item">
+          <label for="city">City<span>*</span></label>
+          <input id="city" type="text" name="city" placeholder="ex:mumbai" required/>
+        </div>
+        <div class="question">
+          <h3><b>Physical Characteristics</b></h3>
+          <label>Q1. Body Frame</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA" name="Q1"/>
+              <label for="VATA" class="radio"><span>Thin/Lean</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA" name="Q1"/>
+              <label for="PITTA" class="radio"><span>Medium/Moderate</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA" name="Q1"/>
+              <label for="KAPHA" class="radio"><span>Huge/Broad</span></label>
+            </div>
+            <label>Q2. Fingernails</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA1" name="Q2"/>
+              <label for="VATA1" class="radio"><span>Cracking and thin.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA1" name="Q2"/>
+              <label for="PITTA1" class="radio"><span>Pink and soft.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA1" name="Q2"/>
+              <label for="KAPHA1" class="radio"><span>Wide, white, and thick.</span></label>
+            </div>
+            <label>Q3. Hair</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA3" name="Q3"/>
+              <label for="VATA3" class="radio"><span>Dull, brittle, thin.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA3" name="Q3"/>
+              <label for="PITTA3" class="radio"><span>Scanty, silky, straight.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA3" name="Q3"/>
+              <label for="KAPHA3" class="radio"><span>Thick, dense, curly.</span></label>
+            </div>
+            <label>Q4. Resting Pulse</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA4" name="Q4"/>
+              <label for="VATA4" class="radio"><span>80-100</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA4" name="Q4"/>
+              <label for="PITTA4" class="radio"><span>70-80</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA4" name="Q4"/>
+              <label for="KAPHA4" class="radio"><span>60-70</span></label>
+            </div>
+            <label>Q5. Bowel Movements</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA5" name="Q5"/>
+              <label for="VATA5" class="radio"><span>Irregular, hard stools, frequent constipation.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA5" name="Q5"/>
+              <label for="PITTA5" class="radio"><span>Loose stools, 1-2 times in a day.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA5" name="Q5"/>
+              <label for="KAPHA5" class="radio"><span>Sluggish, semisolid stools.</span></label>
+            </div>
+            <label>Q6. Appetite</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA6" name="Q6"/>
+              <label for="VATA6" class="radio"><span>Irregular or scanty.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA6" name="Q6"/>
+              <label for="PITTA6" class="radio"><span>Sharp and constant.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA6" name="Q6"/>
+              <label for="KAPHA6" class="radio"><span>Slow, poor, and stable.</span></label>
+            </div>
+            <label>Q7. Eyes</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA7" name="Q7"/>
+              <label for="VATA7" class="radio"><span>Small and unsteady.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA7" name="Q7"/>
+              <label for="PITTA7" class="radio"><span>Colored or have reddish tinge.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA7" name="Q7"/>
+              <label for="KAPHA7" class="radio"><span>Wide with white sclera.</span></label>
+            </div>
+            <label>Q8. Skin</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA8" name="Q8"/>
+              <label for="VATA8" class="radio"><span>Dry and pigmented.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA8" name="Q8"/>
+              <label for="PITTA8" class="radio"><span>Shiny with wrinkles.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA8" name="Q8"/>
+              <label for="KAPHA8" class="radio"><span>Oily but smooth.</span></label>
+            </div>
+            <label>Q9. Lips</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA9" name="Q9"/>
+              <label for="VATA9" class="radio"><span>Thin and cracked.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA9" name="Q9"/>
+              <label for="PITTA9" class="radio"><span>Pink and soft.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA9" name="Q9"/>
+              <label for="KAPHA9" class="radio"><span>Big and large.</span></label>
+            </div>
+            <label>Q10. Forehead</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA10" name="Q10"/>
+              <label for="VATA10" class="radio"><span>Small</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA10" name="Q10"/>
+              <label for="PITTA10" class="radio"><span>Medium</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA10" name="Q10"/>
+              <label for="KAPHA10" class="radio"><span>Large</span></label>
+            </div>
+            <label>Q11. Weight</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA11" name="Q11"/>
+              <label for="VATA11" class="radio"><span>Low and bony, difficult to gain weight.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA11" name="Q11"/>
+              <label for="PITTA11" class="radio"><span>Moderate, easy to gain and lose weight.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA11" name="Q11"/>
+              <label for="KAPHA11" class="radio"><span>Overweight. Difficulty in losing weight.</span></label>
+            </div>
+            <label>Q12. Voice</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA12" name="Q12"/>
+              <label for="VATA12" class="radio"><span>Stammering and weak.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA12" name="Q12"/>
+              <label for="PITTA12" class="radio"><span>Commanding and sharp.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA12" name="Q12"/>
+              <label for="KAPHA12" class="radio"><span>Soft, sweet, and resonating.</span></label>
+            </div>
+            <label>Q13. Weather Dislike</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA13" name="Q13"/>
+              <label for="VATA13" class="radio"><span>Cold and dry.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA13" name="Q13"/>
+              <label for="PITTA13" class="radio"><span>Hot and sunny.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA13" name="Q13"/>
+              <label for="KAPHA13" class="radio"><span>Cold and damp.</span></label>
+            </div>
+            <label>Q14. Temperament</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA14" name="Q14"/>
+              <label for="VATA14" class="radio"><span>Nervous or fearful.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA14" name="Q14"/>
+              <label for="PITTA14" class="radio"><span>Irritable or impatient.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA14" name="Q14"/>
+              <label for="KAPHA14" class="radio"><span>Easy going.</span></label>
+            </div>
+            <label>Q15. Speech</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA15" name="Q15"/>
+              <label for="VATA15" class="radio"><span>Quick or talkative.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA15" name="Q15"/>
+              <label for="PITTA15" class="radio"><span>Moderate or argues.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA15" name="Q15"/>
+              <label for="KAPHA15" class="radio"><span>Slow or silent.</span></label>
+            </div>
+            <label>Q16. Sleep</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA16" name="Q16"/>
+              <label for="VATA16" class="radio"><span>Disturbed/Less</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA16" name="Q16"/>
+              <label for="PITTA16" class="radio"><span>Moderate</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA16" name="Q16"/>
+              <label for="KAPHA16" class="radio"><span>Deep/Long Sleep</span></label>
+            </div>
+            <label>Q17. Memory</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA17" name="Q17"/>
+              <label for="VATA17" class="radio"><span>Grasps quickly but forgets easily.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA17" name="Q17"/>
+              <label for="PITTA17" class="radio"><span>Sharp and clear memory.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA17" name="Q17"/>
+              <label for="KAPHA17" class="radio"><span>Slow to learn but never forgets.</span></label>
+            </div>
+            <label>Q18. Emotion</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA18" name="Q18"/>
+              <label for="VATA18" class="radio"><span>Enthusiastic but full Of worries.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA18" name="Q18"/>
+              <label for="PITTA18" class="radio"><span>Aggressive and angry.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA18" name="Q18"/>
+              <label for="KAPHA18" class="radio"><span>Calm and composed.</span></label>
+            </div>
+            <label>Q19. Mind</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="VATA" id="VATA19" name="Q19"/>
+              <label for="VATA19" class="radio"><span>Quick and adaptable.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="PITTA" id="PITTA19" name="Q19"/>
+              <label for="PITTA19" class="radio"><span>Penetrating and critical.</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="KAPHA" id="KAPHA19" name="Q19"/>
+              <label for="KAPHA19" class="radio"><span>Slow and lethargic.</span></label>
+            </div>
+          </div>
+        </div>
+        <h5>Thanks for the feedback, please submit the form to check your Ayurvedic Dosha</h5>
+        <div align="center"><button type="submit" >Submit</button></div>
+        <h6 align="center" >All Rights Reserved with COGNOZIRE</h6>
+        <img src="/assets/img.jpeg" alt="">
+      </form>
+    </div>
+  </body>
+</html>

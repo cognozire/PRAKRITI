@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags 
+    <meta charset="utf-8"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.rtl.min.css" integrity="sha384-OXTEbYDqaX2ZY/BOaZV/yFGChYHtrXH2nyXJ372n2Y8abBhrqacCEe+3qhSHtLjy" crossorigin="anonymous">
+
+    <title>Diseases!</title>
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+        
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        /* Float four columns side by side */
+        .column {
+          float: left;
+          width: 25%;
+          padding: 0 10px;
+        }
+        
+        /* Remove extra left and right margins, due to padding */
+        .row {margin: 0 -5px;}
+        
+        /* Clear floats after the columns */
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+        
+        /* Responsive columns */
+        @media screen and (max-width: 600px) {
+          .column {
+            width: 100%;
+            display: block;
+            margin-bottom: 20px;
+          }
+        }
+        
+        /* Style the counter cards */
+        .card {
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          padding: 16px;
+          text-align: center;
+          background-color: #f1f1f1;
+        }
+        </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Engage. Enlighten. Elevate.</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="dosh.html">Dosha Identification</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="diseases.html">Diseases</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="diet.html">Diet</a>
+              </li> -->
+              <!-- <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="asana.html">Asanas</a>
+              </li> -->
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <div class="alert alert-success" role="alert">
+        <h4>You could be on the verge of these diseases!</h4>
+      </div>
+    <br>
+    <br>
+    <br>
+    <br>
+  
+    <div class="row">
+    <div class="column">
+      <div class="card" style="margin: auto;">
+        <h3>Difficulty in Concentration</h3>
+      
+        <a class="btn btn-primary" href="diet.html" role="button">DIET</a>
+        <br>
+        <a class="btn btn-primary" href="anasa1.html" role="button">ASANA</a>
+      </div>
+     
+    </div>
+    <div class="column">
+      <div class="card" style="margin: auto;">
+        <h3>Tremors</h3>
+        
+        <a class="btn btn-primary" href="diet.html" role="button">DIET</a>
+        <br>
+        <a class="btn btn-primary" href="asana.html" role="button">ASANA</a>
+      </div>
+      <br>
+    </div>
+    <div class="column">
+      <div class="card" style="margin: auto;">
+        <h3>Asthma</h3>
+        
+        <a class="btn btn-primary" href="diet.html" role="button">DIET</a>
+        <br>
+        <a class="btn btn-primary" href="asana.html" role="button">ASANA</a>
+      </div>
+      <br>
+    </div>
+    <div class="column">
+      <div class="card" style="margin: auto;">
+        <h3>Rough Skin</h3>
+       
+        
+        <a class="btn btn-primary" href="diet.html" role="button">DIET</a>
+        <br>
+        <a class="btn btn-primary" href="asana.html" role="button">ASANA</a>
+        
+      </div>
+      <br>
+      
+    </div>
+    
+    
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  
+    
+  
+  
+
+    <!-- <div class="row">
+        {% for data in diseases %}
+      
+      
+      <div class="column">
+        <div class="card" style="margin: auto;">
+          <h3>{{ data }}</h3>
+          <p>Some text</p>
+          <p>Some text</p>
+        </div>
+        <br>
+      </div>
+      {% endfor %}
+    </div> -->
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
+</html>

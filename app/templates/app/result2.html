@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Required meta tags -->
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">DOSHA!!</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="dosh.html">Dosha Identification</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="diseases.html">Diseases</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="diet.html">Diet</a>
+          </li>
+          
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  
+    
+    <h1>Go for {{class_type}}!</h1>
+</div>
+</div>
+
+<div class="frame" style="margin: 20px;">
+
+  
+  <table border="15px" style="width: 100%;height: 40%;">
+    <tr>
+      {% for data in DataFrame_Vata %}
+      <th>{{ data }}</th>
+      {% endfor %}
+
+      {% for _, record in DataFrame_Vata.iterrows %}
+    <tr>
+      {% for value in record %}
+      <td>{{ value|safe }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+    </tr>
+  </table>
+</div>
+<div class="frame" style="margin: 20px;">
+
+  
+  <table border="15px" style="width: 100%;">
+    <tr>
+      {% for data in DataFrame_vata_diet %}
+      <th>{{ data }}</th>
+      {% endfor %}
+
+      {% for _, record in DataFrame_vata_diet.iterrows %}
+    <tr>
+      {% for value in record %}
+      <td>{{ value|safe }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>
